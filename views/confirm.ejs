@@ -17,7 +17,11 @@
       <dd><%= body %></dd>
     </dl>
 
-    <form method="get" action="/">
+    <form method="post" action="/">
+      <input type="hidden" name="name" value="<%= name %>" />
+      <input type="hidden" name="email" value="<%= email %>" />
+      <input type="hidden" name="subject" value="<%= subject %>" />
+      <input type="hidden" name="body" value="<%= body %>" />
       <button type="submit">修正する</button>
     </form>
 

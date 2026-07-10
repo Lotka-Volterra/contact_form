@@ -13,6 +13,23 @@ describe('GET /', () => {
   });
 });
 
+describe('POST /', () => {
+  it('re-renders the contact form prefilled with the posted values', async () => {
+    const res = await request(app).post('/').type('form').send({
+      name: '山田太郎',
+      email: 'taro@example.com',
+      subject: 'テスト件名',
+      body: 'テスト本文',
+    });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('name="name" value="山田太郎"');
+    expect(res.text).toContain('name="email" value="taro@example.com"');
+    expect(res.text).toContain('name="subject" value="テスト件名"');
+    expect(res.text).toContain('テスト本文');
+  });
+});
+
 describe('POST /confirm', () => {
   it('renders the confirmation screen with the submitted values', async () => {
     const res = await request(app).post('/confirm').type('form').send({
@@ -41,6 +58,17 @@ describe('POST /confirm', () => {
     expect(res.text).toContain('name="email" value="taro@example.com"');
     expect(res.text).toContain('name="subject" value="テスト件名"');
     expect(res.text).toContain('name="body" value="テスト本文"');
+  });
+
+  it('includes an edit form that posts the values back to / to preserve them', async () => {
+    const res = await request(app).post('/confirm').type('form').send({
+      name: '山田太郎',
+      email: 'taro@example.com',
+      subject: 'テスト件名',
+      body: 'テスト本文',
+    });
+
+    expect(res.text).toContain('<form method="post" action="/">');
   });
 
   it('re-renders the contact form with errors when required fields are missing', async () => {

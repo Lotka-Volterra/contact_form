@@ -10,6 +10,11 @@ function createContactFormRouter(contactsRepository) {
     res.render('contact-form', { errors: [], values: EMPTY_VALUES });
   });
 
+  router.post('/', (req, res) => {
+    const { name, email, subject, body } = req.body;
+    res.render('contact-form', { errors: [], values: { name, email, subject, body } });
+  });
+
   router.post('/confirm', (req, res) => {
     const { name, email, subject, body } = req.body;
     const errors = validateContact({ name, email, subject, body });
