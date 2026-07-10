@@ -25,6 +25,14 @@ describe('GET /admin', () => {
     expect(res.text).toContain('一覧テスト件名');
     expect(res.text).toContain('新規');
   });
+
+  it('shows the received date and time converted to JST', async () => {
+    await createContact({ subject: 'JST表示テスト' });
+
+    const res = await request(app).get('/admin');
+
+    expect(res.text).toContain('(JST)');
+  });
 });
 
 describe('GET /admin/:id', () => {
@@ -41,6 +49,7 @@ describe('GET /admin/:id', () => {
     expect(res.text).toContain('<option value="new"');
     expect(res.text).toContain('<option value="in_progress"');
     expect(res.text).toContain('<option value="resolved"');
+    expect(res.text).toContain('(JST)');
   });
 
   it('returns 404 when the contact does not exist', async () => {

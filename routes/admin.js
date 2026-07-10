@@ -1,8 +1,13 @@
 const express = require('express');
 const { STATUSES, isValidStatus, labelFor } = require('../services/contactStatus');
+const { toJstDisplayString } = require('../services/dateFormatter');
 
 function toListItem(contact) {
-  return { ...contact, statusLabel: labelFor(contact.status) };
+  return {
+    ...contact,
+    statusLabel: labelFor(contact.status),
+    createdAtJst: toJstDisplayString(contact.created_at),
+  };
 }
 
 function createAdminRouter(contactsRepository) {
@@ -20,7 +25,7 @@ function createAdminRouter(contactsRepository) {
       return res.status(404).render('admin/not-found');
     }
 
-    res.render('admin/detail', { contact, statuses: STATUSES, labelFor });
+    res.render('admin/detail', { contact: toListItem(contact), statuses: STATUSES, labelFor });
   });
 
   router.post('/:id/status', (req, res) => {
@@ -32,7 +37,7 @@ function createAdminRouter(contactsRepository) {
 
     if (!isValidStatus(req.body.status)) {
       return res.status(400).render('admin/detail', {
-        contact,
+        contact: toListItem(contact),
         statuses: STATUSES,
         labelFor,
         error: '不正なステータスです',

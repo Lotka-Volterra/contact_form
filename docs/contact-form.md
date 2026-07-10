@@ -51,7 +51,7 @@ POST /complete    保存 + 完了画面（views/complete.ejs）
 | subject     | TEXT    | NOT NULL                               |
 | body        | TEXT    | NOT NULL                               |
 | status      | TEXT    | NOT NULL DEFAULT `'new'`（英語コードで保持。表示ラベルとの対応は[docs/admin.md](./admin.md)を参照） |
-| created_at  | TEXT    | NOT NULL DEFAULT `datetime('now')`     |
+| created_at  | TEXT    | NOT NULL DEFAULT `datetime('now')`（SQLiteの仕様によりUTC。表示時にJSTへ変換する。詳細は[docs/admin.md](./admin.md)参照） |
 
 DB接続先は`app.js`で環境ごとに切り替えている。
 - `NODE_ENV=test`（Jest実行時に自動設定される）: `:memory:`
