@@ -5,5 +5,5 @@
             "version": "lts"
         }
     },
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y python3"
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y python3 sqlite3"
 }
