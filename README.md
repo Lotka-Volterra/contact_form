@@ -1,5 +1,7 @@
 # お問い合わせフォーム
 
+[![CI](https://github.com/Lotka-Volterra/contact_form/actions/workflows/ci.yml/badge.svg)](https://github.com/Lotka-Volterra/contact_form/actions/workflows/ci.yml)
+
 お問い合わせフォームと、問い合わせ内容を管理する管理ページを持つWebアプリケーションです。
 
 ## 技術スタック
