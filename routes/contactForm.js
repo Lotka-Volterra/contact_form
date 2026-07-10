@@ -1,14 +1,24 @@
 const express = require('express');
 
-const router = express.Router();
+function createContactFormRouter(contactsRepository) {
+  const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('contact-form');
-});
+  router.get('/', (req, res) => {
+    res.render('contact-form');
+  });
 
-router.post('/confirm', (req, res) => {
-  const { name, email, subject, body } = req.body;
-  res.render('confirm', { name, email, subject, body });
-});
+  router.post('/confirm', (req, res) => {
+    const { name, email, subject, body } = req.body;
+    res.render('confirm', { name, email, subject, body });
+  });
 
-module.exports = router;
+  router.post('/complete', (req, res) => {
+    const { name, email, subject, body } = req.body;
+    contactsRepository.save({ name, email, subject, body });
+    res.render('complete');
+  });
+
+  return router;
+}
+
+module.exports = createContactFormRouter;

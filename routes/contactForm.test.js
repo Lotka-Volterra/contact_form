@@ -43,3 +43,17 @@ describe('POST /confirm', () => {
     expect(res.text).toContain('name="body" value="テスト本文"');
   });
 });
+
+describe('POST /complete', () => {
+  it('saves the contact and shows a thank-you message', async () => {
+    const res = await request(app).post('/complete').type('form').send({
+      name: '山田太郎',
+      email: 'taro@example.com',
+      subject: 'テスト件名',
+      body: 'テスト本文',
+    });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('お問い合わせありがとうございました');
+  });
+});
