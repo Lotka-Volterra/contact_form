@@ -6,22 +6,29 @@
   </head>
   <body>
     <h1>お問い合わせフォーム</h1>
+    <% if (errors && errors.length > 0) { %>
+      <ul class="errors">
+        <% errors.forEach(function (error) { %>
+          <li><%= error %></li>
+        <% }); %>
+      </ul>
+    <% } %>
     <form method="post" action="/confirm">
       <label>
         名前
-        <input type="text" name="name" required />
+        <input type="text" name="name" value="<%= values.name %>" required />
       </label>
       <label>
         メールアドレス
-        <input type="email" name="email" required />
+        <input type="email" name="email" value="<%= values.email %>" required />
       </label>
       <label>
         件名
-        <input type="text" name="subject" required />
+        <input type="text" name="subject" value="<%= values.subject %>" required />
       </label>
       <label>
         本文
-        <textarea name="body" required></textarea>
+        <textarea name="body" required><%= values.body %></textarea>
       </label>
       <button type="submit">確認画面へ</button>
     </form>
