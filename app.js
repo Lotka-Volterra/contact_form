@@ -3,6 +3,7 @@ const express = require('express');
 const { createConnection } = require('./db/connection');
 const { createContactsRepository } = require('./repositories/contactsRepository');
 const createContactFormRouter = require('./routes/contactForm');
+const createAdminRouter = require('./routes/admin');
 
 const app = express();
 
@@ -17,5 +18,6 @@ const db = createConnection(dbPath);
 const contactsRepository = createContactsRepository(db);
 
 app.use('/', createContactFormRouter(contactsRepository));
+app.use('/admin', createAdminRouter(contactsRepository));
 
 module.exports = app;
