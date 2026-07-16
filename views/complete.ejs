@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <title>送信完了</title>
+    <%- include('partials/head', { title: '送信完了' }) %>
   </head>
   <body>
-    <h1>お問い合わせありがとうございました</h1>
-    <a href="/">トップに戻る</a>
+    <div class="container">
+      <div class="card">
+        <h1>お問い合わせありがとうございました</h1>
+        <a href="/" class="back-link">トップに戻る</a>
+      </div>
+    </div>
   </body>
 </html>

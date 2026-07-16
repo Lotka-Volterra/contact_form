@@ -1,36 +1,41 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <title>お問い合わせ内容の確認</title>
+    <%- include('partials/head', { title: 'お問い合わせ内容の確認' }) %>
   </head>
   <body>
-    <h1>お問い合わせ内容の確認</h1>
-    <dl>
-      <dt>名前</dt>
-      <dd><%= name %></dd>
-      <dt>メールアドレス</dt>
-      <dd><%= email %></dd>
-      <dt>件名</dt>
-      <dd><%= subject %></dd>
-      <dt>本文</dt>
-      <dd><%= body %></dd>
-    </dl>
+    <div class="container">
+      <div class="card">
+        <h1>お問い合わせ内容の確認</h1>
+        <dl class="summary-list">
+          <dt>名前</dt>
+          <dd><%= name %></dd>
+          <dt>メールアドレス</dt>
+          <dd><%= email %></dd>
+          <dt>件名</dt>
+          <dd><%= subject %></dd>
+          <dt>本文</dt>
+          <dd><%= body %></dd>
+        </dl>
 
-    <form method="post" action="/">
-      <input type="hidden" name="name" value="<%= name %>" />
-      <input type="hidden" name="email" value="<%= email %>" />
-      <input type="hidden" name="subject" value="<%= subject %>" />
-      <input type="hidden" name="body" value="<%= body %>" />
-      <button type="submit">修正する</button>
-    </form>
+        <div class="form-actions">
+          <form method="post" action="/">
+            <input type="hidden" name="name" value="<%= name %>" />
+            <input type="hidden" name="email" value="<%= email %>" />
+            <input type="hidden" name="subject" value="<%= subject %>" />
+            <input type="hidden" name="body" value="<%= body %>" />
+            <button type="submit" class="btn btn-secondary">修正する</button>
+          </form>
 
-    <form method="post" action="/complete">
-      <input type="hidden" name="name" value="<%= name %>" />
-      <input type="hidden" name="email" value="<%= email %>" />
-      <input type="hidden" name="subject" value="<%= subject %>" />
-      <input type="hidden" name="body" value="<%= body %>" />
-      <button type="submit">送信する</button>
-    </form>
+          <form method="post" action="/complete">
+            <input type="hidden" name="name" value="<%= name %>" />
+            <input type="hidden" name="email" value="<%= email %>" />
+            <input type="hidden" name="subject" value="<%= subject %>" />
+            <input type="hidden" name="body" value="<%= body %>" />
+            <button type="submit" class="btn btn-primary">送信する</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
